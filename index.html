@@ -2,11 +2,13 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>吃雞雞</title>
 
 <style>
 body{
     margin:0;
+    width:100vw;
     height:100vh;
     overflow:hidden;
     background:#0f172a;
@@ -18,21 +20,24 @@ body{
 button{
     padding:15px 30px;
     font-size:20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
 }
 
 .fall{
     position:absolute;
-    width:120px;
-    top:-150px;
+    top:-200px;
     animation:fall 4s linear forwards;
+    pointer-events:none;
 }
 
 @keyframes fall{
     from{
-        top:-150px;
+        top:-200px;
     }
     to{
-        top:100vh;
+        top:110vh;
     }
 }
 </style>
@@ -43,14 +48,23 @@ button{
 
 <script>
 function dropGif(){
+
     const gif = document.createElement("img");
 
     gif.src = "ed.gif";
     gif.className = "fall";
 
+    // 自動依螢幕寬度縮放
+    const size = Math.max(
+        60,
+        Math.min(window.innerWidth * 0.2, 120)
+    );
+
+    gif.style.width = size + "px";
+
     // 隨機水平位置
     gif.style.left =
-        Math.random() * (window.innerWidth - 120) + "px";
+        Math.random() * (window.innerWidth - size) + "px";
 
     document.body.appendChild(gif);
 
