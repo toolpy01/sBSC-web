@@ -18,7 +18,7 @@ body{
     flex-direction:column;
 }
 
-/* 標題發光 */
+/* 標題 */
 .title{
     position:absolute;
     top:15%;
@@ -27,48 +27,22 @@ body{
     color:white;
     font-size:24px;
     font-weight:bold;
-    text-align:center;
-
-    text-shadow:
-        0 0 5px #fff,
-        0 0 10px #00e5ff,
-        0 0 20px #00e5ff;
-
-    animation: glow 2s ease-in-out infinite alternate;
+    text-shadow:0 0 10px #00e5ff;
 }
 
-@keyframes glow {
-    from { filter: brightness(1); }
-    to { filter: brightness(1.5); }
-}
-
-/* 🔥 RGB 呼吸按鈕 */
+/* 🔘 按鈕：固定背景 + RGB邊框 */
 button{
     padding:16px 34px;
     font-size:20px;
-    border:none;
     border-radius:14px;
     cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    z-index:1;
 
-    animation: rgbBreath 4s infinite ease-in-out;
-}
+    background:#1f2937; /* 固定背景 */
+    color:white;
 
-/* RGB 背景呼吸 */
-@keyframes rgbBreath {
-    0%   { background:#ff004c; box-shadow:0 0 10px #ff004c; }
-    25%  { background:#ffcc00; box-shadow:0 0 15px #ffcc00; }
-    50%  { background:#00e5ff; box-shadow:0 0 20px #00e5ff; }
-    75%  { background:#7cff00; box-shadow:0 0 15px #7cff00; }
-    100% { background:#ff004c; box-shadow:0 0 10px #ff004c; }
-}
-
-/* 🌈 彩虹文字 */
-button span{
-    background: linear-gradient(
-        90deg,
+    border:4px solid;
+    border-image: linear-gradient(
+        45deg,
         red,
         orange,
         yellow,
@@ -76,7 +50,23 @@ button span{
         cyan,
         blue,
         violet
-    );
+    ) 1;
+
+    animation: borderGlow 3s infinite linear;
+}
+
+/* 邊框呼吸發光 */
+@keyframes borderGlow {
+    0%   { box-shadow:0 0 5px red; }
+    25%  { box-shadow:0 0 10px yellow; }
+    50%  { box-shadow:0 0 15px cyan; }
+    75%  { box-shadow:0 0 10px lime; }
+    100% { box-shadow:0 0 5px red; }
+}
+
+/* 🌈 按鈕文字彩虹 */
+button span{
+    background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
     background-size:400%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -89,12 +79,27 @@ button span{
     100% { background-position:400% }
 }
 
-/* 掉落 GIF */
+/* 🎮 GIF 掉落 + RGB邊框 */
 .fall{
     position:absolute;
     top:-200px;
     animation:fall 4s linear forwards;
     pointer-events:none;
+
+    border:4px solid;
+    border-image: linear-gradient(
+        45deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    ) 1;
+
+    box-shadow:0 0 15px cyan;
+    border-radius:12px;
 }
 
 @keyframes fall{
