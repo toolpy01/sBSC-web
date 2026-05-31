@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掉落圖片</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f172a;
+    font-family:sans-serif;
+}
+
+button{
+    padding:16px 32px;
+    font-size:20px;
+    border:none;
+    border-radius:12px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+}
+
+.fall{
+    position:absolute;
+    width:150px;
+    left:50%;
+    top:-200px;
+    transform:translateX(-50%);
+    animation:fall 2s ease-in forwards;
+}
+
+@keyframes fall{
+    0%{
+        top:-200px;
+    }
+    100%{
+        top:calc(100vh - 150px);
+    }
+}
+</style>
+</head>
+<body>
+
+<button onclick="dropImage()">掉落圖片</button>
+
+<script>
+function dropImage(){
+    const img = document.createElement("img");
+
+    img.src = "test.png";
+    img.className = "fall";
+
+    document.body.appendChild(img);
+}
+</script>
+
+</body>
+</html>
