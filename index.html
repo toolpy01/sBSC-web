@@ -18,7 +18,7 @@ body{
     flex-direction:column;
 }
 
-/* 發光文字 */
+/* 標題發光 */
 .title{
     position:absolute;
     top:15%;
@@ -29,44 +29,67 @@ body{
     font-weight:bold;
     text-align:center;
 
-    /* 發光效果 */
     text-shadow:
         0 0 5px #fff,
         0 0 10px #00e5ff,
-        0 0 20px #00e5ff,
-        0 0 40px #00e5ff;
+        0 0 20px #00e5ff;
 
     animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* 發光閃爍動畫 */
 @keyframes glow {
-    from {
-        text-shadow:
-            0 0 5px #fff,
-            0 0 10px #00e5ff,
-            0 0 20px #00e5ff,
-            0 0 30px #00e5ff;
-    }
-    to {
-        text-shadow:
-            0 0 10px #fff,
-            0 0 20px #00ffff,
-            0 0 40px #00ffff,
-            0 0 60px #00ffff;
-    }
+    from { filter: brightness(1); }
+    to { filter: brightness(1.5); }
 }
 
-/* 按鈕 */
+/* 🔥 RGB 呼吸按鈕 */
 button{
-    padding:15px 30px;
+    padding:16px 34px;
     font-size:20px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    z-index:1;
+
+    animation: rgbBreath 4s infinite ease-in-out;
 }
 
-/* 掉落圖片 */
+/* RGB 背景呼吸 */
+@keyframes rgbBreath {
+    0%   { background:#ff004c; box-shadow:0 0 10px #ff004c; }
+    25%  { background:#ffcc00; box-shadow:0 0 15px #ffcc00; }
+    50%  { background:#00e5ff; box-shadow:0 0 20px #00e5ff; }
+    75%  { background:#7cff00; box-shadow:0 0 15px #7cff00; }
+    100% { background:#ff004c; box-shadow:0 0 10px #ff004c; }
+}
+
+/* 🌈 彩虹文字 */
+button span{
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    );
+    background-size:400%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: rainbowText 3s linear infinite;
+    font-weight:bold;
+}
+
+@keyframes rainbowText {
+    0% { background-position:0% }
+    100% { background-position:400% }
+}
+
+/* 掉落 GIF */
 .fall{
     position:absolute;
     top:-200px;
@@ -75,12 +98,8 @@ button{
 }
 
 @keyframes fall{
-    from{
-        top:-200px;
-    }
-    to{
-        top:110vh;
-    }
+    from{ top:-200px; }
+    to{ top:110vh; }
 }
 </style>
 </head>
@@ -89,7 +108,9 @@ button{
 
 <div class="title">我用AI隨便做的🥵</div>
 
-<button onclick="dropGif()">點我吃雞雞</button>
+<button onclick="dropGif()">
+    <span>點我吃雞雞</span>
+</button>
 
 <script>
 function dropGif(){
