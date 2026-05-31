@@ -30,12 +30,75 @@ body{
     text-shadow:0 0 10px #00e5ff;
 }
 
-/* 🔴 點擊次數（紅色RGB） */
-.counter{
+/* 🔥 按鈕（流動RGB邊框） */
+button{
+    margin-top:80px;
+    padding:16px 34px;
+    font-size:20px;
+    border-radius:14px;
+    cursor:pointer;
+
+    background:#1f2937;
+    color:white;
+
+    border:3px solid transparent;
+    position:relative;
+    z-index:1;
+}
+
+/* 讓邊框流動 */
+button::before{
+    content:"";
     position:absolute;
-    top:18%;
-    left:50%;
-    transform:translateX(-50%);
+    inset:-3px;
+    border-radius:16px;
+    padding:3px;
+    background: linear-gradient(
+        45deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet,
+        red
+    );
+    background-size:300%;
+    animation: borderMove 3s linear infinite;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    z-index:-1;
+}
+
+@keyframes borderMove{
+    0% { background-position:0% }
+    100% { background-position:300% }
+}
+
+/* 彩虹文字 */
+button span{
+    background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+    background-size:400%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: rainbowText 3s linear infinite;
+    font-weight:bold;
+}
+
+@keyframes rainbowText {
+    0% { background-position:0% }
+    100% { background-position:400% }
+}
+
+/* 🔴 點擊次數（移到按鈕下方） */
+.counter{
+    margin-top:20px;
     font-size:22px;
     font-weight:bold;
     color:white;
@@ -43,7 +106,7 @@ body{
     animation: redGlow 2s infinite ease-in-out;
 }
 
-/* 紅色呼吸發光 */
+/* 紅色發光 */
 @keyframes redGlow {
     0% {
         text-shadow:
@@ -65,54 +128,13 @@ body{
     }
 }
 
-/* 按鈕 */
-button{
-    margin-top:80px;
-    padding:16px 34px;
-    font-size:20px;
-    border-radius:14px;
-    cursor:pointer;
-
-    background:#1f2937;
-
-    border:4px solid;
-    border-image: linear-gradient(
-        45deg,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        blue,
-        violet
-    ) 1;
-
-    box-shadow:0 0 10px cyan;
-}
-
-/* 彩虹文字 */
-button span{
-    background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-    background-size:400%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation: rainbowText 3s linear infinite;
-    font-weight:bold;
-}
-
-@keyframes rainbowText {
-    0% { background-position:0% }
-    100% { background-position:400% }
-}
-
-/* GIF 掉落 */
+/* GIF 掉落（細邊框） */
 .fall{
     position:absolute;
     top:-200px;
     animation:fall 4s linear forwards;
     pointer-events:none;
 
-    /* 🔥 細邊框 */
     border:2px solid;
     border-image: linear-gradient(
         45deg,
@@ -125,9 +147,7 @@ button span{
         violet
     ) 1;
 
-    /* 🔥 輕微發光（不要太重） */
     box-shadow:0 0 6px rgba(0,255,255,0.6);
-
     border-radius:10px;
 }
 
@@ -142,11 +162,12 @@ button span{
 
 <div class="title">我用AI隨便做的ᕙ⁠(⁠＠⁠°⁠▽⁠°⁠＠⁠)⁠ᕗ</div>
 
-<div class="counter" id="counter">點擊次數：0</div>
-
 <button onclick="dropGif()">
     <span>點我吃雞雞</span>
 </button>
+
+<!-- 🔴 已移到按鈕下面 -->
+<div class="counter" id="counter">點擊次數：0</div>
 
 <script>
 
