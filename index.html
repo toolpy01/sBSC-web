@@ -15,8 +15,49 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
 }
 
+/* 發光文字 */
+.title{
+    position:absolute;
+    top:15%;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+
+    /* 發光效果 */
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff,
+        0 0 40px #00e5ff;
+
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* 發光閃爍動畫 */
+@keyframes glow {
+    from {
+        text-shadow:
+            0 0 5px #fff,
+            0 0 10px #00e5ff,
+            0 0 20px #00e5ff,
+            0 0 30px #00e5ff;
+    }
+    to {
+        text-shadow:
+            0 0 10px #fff,
+            0 0 20px #00ffff,
+            0 0 40px #00ffff,
+            0 0 60px #00ffff;
+    }
+}
+
+/* 按鈕 */
 button{
     padding:15px 30px;
     font-size:20px;
@@ -25,6 +66,7 @@ button{
     cursor:pointer;
 }
 
+/* 掉落圖片 */
 .fall{
     position:absolute;
     top:-200px;
@@ -42,7 +84,10 @@ button{
 }
 </style>
 </head>
+
 <body>
+
+<div class="title">我用AI隨便做的🥵</div>
 
 <button onclick="dropGif()">點我吃雞雞</button>
 
@@ -54,7 +99,6 @@ function dropGif(){
     gif.src = "ed.gif";
     gif.className = "fall";
 
-    // 自動依螢幕寬度縮放
     const size = Math.max(
         60,
         Math.min(window.innerWidth * 0.2, 120)
@@ -62,7 +106,6 @@ function dropGif(){
 
     gif.style.width = size + "px";
 
-    // 隨機水平位置
     gif.style.left =
         Math.random() * (window.innerWidth - size) + "px";
 
