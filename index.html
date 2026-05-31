@@ -46,7 +46,6 @@ button{
     z-index:1;
 }
 
-/* 讓邊框流動 */
 button::before{
     content:"";
     position:absolute;
@@ -96,58 +95,41 @@ button span{
     100% { background-position:400% }
 }
 
-/* 🔴 點擊次數（移到按鈕下方） */
+/* 🔴 點擊次數 */
 .counter{
     margin-top:20px;
     font-size:22px;
     font-weight:bold;
     color:white;
-
     animation: redGlow 2s infinite ease-in-out;
 }
 
-/* 紅色發光 */
 @keyframes redGlow {
     0% {
-        text-shadow:
-        0 0 5px #ff0000,
-        0 0 10px #ff3333,
-        0 0 20px #ff0000;
+        text-shadow:0 0 5px #ff0000,0 0 10px #ff3333,0 0 20px #ff0000;
     }
     50% {
-        text-shadow:
-        0 0 10px #ff6666,
-        0 0 20px #ff0000,
-        0 0 30px #ff3333;
+        text-shadow:0 0 10px #ff6666,0 0 20px #ff0000,0 0 30px #ff3333;
     }
     100% {
-        text-shadow:
-        0 0 5px #ff0000,
-        0 0 10px #ff3333,
-        0 0 20px #ff0000;
+        text-shadow:0 0 5px #ff0000,0 0 10px #ff3333,0 0 20px #ff0000;
     }
 }
 
-/* GIF 掉落（細邊框） */
+/* ✨ GIF（金色發光邊框） */
 .fall{
     position:absolute;
     top:-200px;
     animation:fall 4s linear forwards;
     pointer-events:none;
 
-    border:2px solid;
-    border-image: linear-gradient(
-        45deg,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        blue,
-        violet
-    ) 1;
+    border:2px solid #ffd700;
 
-    box-shadow:0 0 6px rgba(0,255,255,0.6);
+    box-shadow:
+        0 0 5px #ffd700,
+        0 0 10px #ffea70,
+        0 0 20px rgba(255, 215, 0, 0.7);
+
     border-radius:10px;
 }
 
@@ -166,7 +148,6 @@ button span{
     <span>點我吃雞雞</span>
 </button>
 
-<!-- 🔴 已移到按鈕下面 -->
 <div class="counter" id="counter">點擊次數：0</div>
 
 <script>
